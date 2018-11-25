@@ -6,6 +6,7 @@ from keras.layers import Dense, Conv2D, MaxPooling2D, Dropout, Flatten
 from keras.preprocessing.image import ImageDataGenerator
 from PIL import Image
 import matplotlib.pyplot as plt
+from sklearn.metrics import confusion_matrix
 #Code for function plots obtained from video: 
 #https://www.youtube.com/watch?v=bfQBPNDy5EM
 
@@ -23,18 +24,18 @@ def plots(ims,figsize=(12,60),rows=1,interp=False,titles=None):
             sp.set_title(titles[i],fontsize=16)
         plt.imshow(ims[i],interpolation=None if interp else 'none')
 #Preparation of Training, Validation, and Test Data
-trPath = 'Data\train'
-tePath = 'Data\test'
-vaPath = 'Data\valid'
+trPath = 'Data\\train'
+tePath = 'Data\\test'
+vaPath = 'Data\\valid'
 cl = ['-','+','div','times','0','1','2','3','4','5','6','7','8','9']
-trBatches = ImageDataGenerator().flow_from_directory(trPath,
-                              target_size=(45,45),classes=cl,
-                              batch_size=1787)
-vaBatches = ImageDataGenerator().flow_from_directory(vaPath,
-                              target_size=(45,45),classes=cl,
-                              batch_size=56)
+##trBatches = ImageDataGenerator().flow_from_directory(trPath,
+#                              target_size=(45,45),classes=cl,
+#                              batch_size=1787)
+##vaBatches = ImageDataGenerator().flow_from_directory(vaPath,
+#                              target_size=(45,45),classes=cl,
+#                              batch_size=56)
 teBatches = ImageDataGenerator().flow_from_directory(tePath,
-                              target_size=(45,45),classes=cl,
+                              target_size=(45,45),class_mode=None,
                               batch_size=1)
 ##========= The Model =======##
 model = Sequential()
@@ -51,7 +52,8 @@ model.add(Dense(14, activation='softmax'))
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 #model.fit_generator(trBatches,steps_per_epoch=88,validation_data=vaBatches,
                    # validation_steps=4,epochs=4,verbose=1)
-test_imgs, test_labels = next(teBatches)
-plots(test_imgs,titles=test_labels)
-#predictions = model.predict_generator(teBatches,steps=1,verbose=0)
-#print (predictions)
+teBatches.reset()
+test_imgs = next(teBatches)
+plots(test_imgs)
+prediction = np.argmax(model.predict_generator(teBatches,steps=1,verbose=0))
+print (cl[prediction])
