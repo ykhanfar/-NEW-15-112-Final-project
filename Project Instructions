@@ -1,0 +1,17 @@
+To be able to run MEE.py, you will need to make sure you have everything that's in the Final project zip file in the same folder
+(excluding the images).
+
+You also need to make sure you have all of the following libraries installed on Python 3+ (I recommend using Anaconda):
+
+- Keras (with Tensorflow backend)
+- OpenCV
+- PIL
+- Numpy
+
+The next few should be default, but just in case, I'll mention them:
+
+- OS
+- Tkinter
+- Random
+
+With these requirements knocked off, you should be able to run MEE.py
