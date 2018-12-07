@@ -9,9 +9,8 @@ I will be using a few libraries, possibly more than the ones I list here:
 - Matplotlib
 - OpenCV
 
-The interface will contain a prompt to upload the image of the expression. After the upload, it will display the image
-and a prompt to evaluate it. Then, it will attempt to evaluate the expression by segmenting first, then evaluate it.
+The UI will allow the user to choose an image file from disk to upload it. Afterwards, the image will be displayed, and the user can choose to preview the image as black and white and to alter the threshold to make the expression more recognizable in the image. The user can then press a button to evalaute the expression, and the expression plus the result will be displayed in text form. In the top left is an information and instructions menu.
 
-By the first demo, the program will be able to take individual (positive) integers or the basic arithmetic symbols (+,-,/,÷,x) (**÷ and / are both division**) and semi-accurately interpret them as the correct integer or symbol. By semi-accurately, I mean anything that's not random.
+By the first demo, the program will be able to take individual (positive) integers or the basic arithmetic symbols (+,-,÷,x) and semi-accurately interpret them as the correct integer or symbol. By semi-accurately, I mean anything that's not random.
 
 My final submission should have an improved prediction accuracy, and will be able to evaluate an entire expression, given that it only uses the basic arithmetic operations I listed.
